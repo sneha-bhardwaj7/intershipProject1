@@ -1,50 +1,52 @@
+import chips1 from "../assets/chips1.png";
+import pickles4 from "../assets/pickles4.png";
+import chips2 from "../assets/chips2.png";
+import pickles1 from "../assets/pickles1.png";
+
 export const bestsellers = [
   {
-    id: 1,
-    name: "Premium Banana Chips",
-    benefits: "Rich in Potassium & Fiber",
-    weight: "100 g",
-    price: "₹100.00",
-    originalPrice: "₹120.00",
+    id: "bs1",
+    name: "Classic Banana Chips",
+    description: "Most popular crispy banana chips",
+    price: 299,
+    originalPrice: 399,
+    image: chips1,
     rating: 5,
-    category: "banana-chips",
-    isBestseller: true,
   },
   {
-    id: 10,
+    id: "bs2",
     name: "Mango Pickle",
-    benefits: "Rich in Vitamin C",
-    weight: "250 g",
-    price: "₹150.00",
-    originalPrice: "₹180.00",
+    description: "Traditional spicy mango pickle",
+    price: 249,
+    originalPrice: 349,
+    image: pickles4,
     rating: 5,
-    category: "pickles",
-    isBestseller: true,
   },
   {
-    id: 3,
-    name: "Organic Banana Chips",
-    benefits: "100% Organic & Fresh",
-    weight: "200 g",
-    price: "₹200.00",
-    originalPrice: "₹240.00",
-    rating: 5,
-    category: "banana-chips",
-    isBestseller: true,
+    id: "bs3",
+    name: "Spicy Banana Chips",
+    description: "Hot and spicy banana chips",
+    price: 199,
+    originalPrice: 299,
+    image: chips2,
+    rating: 4,
   },
-  {
-    id: 12,
-    name: "Lemon Pickle",
-    benefits: "Tangy & Refreshing",
-    weight: "200 g",
-    price: "₹120.00",
-    originalPrice: "₹150.00",
-    rating: 5,
-    category: "pickles",
-    isBestseller: true,
+   {
+    id: "bs4",
+    name: "Spicy Banana Chips",
+    description: "Hot and spicy banana chips",
+    price: 199,
+    originalPrice: 299,
+    image: pickles1,
+    rating: 4,
   },
+  //    {
+  //   id: "bs5",
+  //   name: "Spicy Banana Chips",
+  //   description: "Hot and spicy banana chips",
+  //   price: 199,
+  //   originalPrice: 299,
+  //   image: pickles1,
+  //   rating: 4,
+  // },
 ]
-
-export const getBestsellers = () => {
-  return bestsellers
-}

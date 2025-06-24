@@ -1,24 +1,18 @@
+// src/data/categories.js
+import bananaChipsImg from "../assets/chips3.png";
+import picklesImg from "../assets/pickles2.png";
+
 export const categories = [
   {
     id: "banana-chips",
-    name: "banana-chips",
-    displayName: "BANANA CHIPS",
-    description: "Crispy, delicious banana chips made from real bananas",
-    heroTitle: "Banana\nChips",
-    heroSubtitle: "Crispy, delicious banana chips\nmade from real bananas",
-    bgGradient: "bg-gradient-to-r from-yellow-200 to-yellow-300",
+    name: "BANANA CHIPS",
+    image: bananaChipsImg,
+    href: "/banana-chips",
   },
   {
     id: "pickles",
-    name: "pickles",
-    displayName: "PICKLES",
-    description: "Tangy and spicy pickles, perfect to complement your meals",
-    heroTitle: "Pickles",
-    heroSubtitle: "Tangy and spicy pickles,\nperfect to complement your meals.",
-    bgGradient: "bg-gradient-to-r from-orange-100 to-yellow-100",
+    name: "PICKLES",
+    image: picklesImg,
+    href: "/pickles",
   },
-]
-
-export const getCategoryById = (id) => {
-  return categories.find((category) => category.id === id)
-}
+];
