@@ -230,4 +230,56 @@ export const products = {
       rating: 5,
     },
   ],
+
+
+
+  Testimonial: [
+    {
+    id: 1,
+    name: "Banana Chips",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 2,
+    name: "Pickles",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 3,
+    name: "Spicy Mixture",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 4,
+    name: "Laddu",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 5,
+    name: "Khakhra",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 6,
+    name: "Murukku",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 7,
+    name: "Thattai",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 8,
+    name: "Appalam",
+    image: "../assets/chips3.png",
+  },
+  {
+    id: 9,
+    name: "Chakli",
+    image: "../assets/chips3.png",
+  },
+  ],
+
+
 }

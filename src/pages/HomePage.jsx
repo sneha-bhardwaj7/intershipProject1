@@ -266,7 +266,6 @@ export default function HomePage() {
     </h2>
 
     <div className="flex flex-col lg:flex-row gap-16 lg:gap-28 items-start">
-      
       {/* Left Side - Main Testimonial */}
       <div className="w-full lg:w-1/2 mt-10 lg:mt-20">
         <div className="relative bg-gray-200 rounded-3xl p-6 sm:p-8 h-72 sm:h-80">
@@ -276,29 +275,33 @@ export default function HomePage() {
       </div>
 
       {/* Right Side - Testimonial Grid */}
-      <div className="w-full lg:w-1/2">
-        <div className="grid grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-4">
-          {Array.from({ length: 9 }, (_, index) => (
-            <div
-              key={index}
-              className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center"
-            >
-              {index === 4 ? (
-                <div className="text-center p-2">
-                  <p className="font-bold text-sl sm:text-sl leading-tight">WHAT OUR</p>
-                  <p className="font-bold text-sl sm:text-sl leading-tight">CLIENT SAY</p>
+          <div className="w-full lg:w-1/2">
+            <div className="grid grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-4">
+              {products.Testimonial.slice(0, 9).map((product, index) => (
+                <div
+                  key={product.id}
+                  className="aspect-square bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center"
+                >
+                  {index === 4 ? (
+                    <div className="text-center p-2">
+                      <p className="font-bold text-sl sm:text-sl leading-tight">WHAT OUR</p>
+                      <p className="font-bold text-sl sm:text-sl leading-tight">CLIENT SAY</p>
+                    </div>
+                  ) : (
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
-              ) : (
-                <div className="w-full h-full bg-gray-300 rounded-lg" />
-              )}
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-    </div>
-  </div>
-</section>
+              </div>
+            </div>
+          </section>
 
 
       <Footer />
