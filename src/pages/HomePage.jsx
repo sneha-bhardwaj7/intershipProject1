@@ -6,6 +6,7 @@ import Carousel from "./Carousel"
 import { products } from "../data/products"
 import groupPickles from "../assets/groupPickles.png" // Replace with your correct path
 import Footer from "../components/common/Footer"
+import curveBg from "../assets/curveShape.png"
 
 export default function HomePage() {
   return (
@@ -165,96 +166,82 @@ export default function HomePage() {
       {/* BEST SELLERS */}
 
       <section className="py-16 bg-white">
-        <div className="max-w-[1440px] mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-6">
-            <div className="w-full md:w-[65%]">
-              <Carousel heading="WEEKLY TOP PURCHASES" />
-            </div>
-            {/* Right Side Box */}
-            <div className="hidden md:flex justify-center items-center bg-[#FDBA4F] text-black font-bold text-2xl w-full md:w-[20%] h-full min-h-[350px] text-center px-6 py-12 rounded-tl-[80px] rounded-bl-[80px]">
-              <span className="leading-tight">
-                HIGHEST
-                <br />
-                SOLD
-              </span>
-            </div>
+        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-stretch gap-6 px-0 md:px-0">
+          {/* Product Carousel */}
+          <div className="w-full md:w-[65%]">
+            <Carousel heading="WEEKLY TOP PURCHASES" />
           </div>
+          {/* Left Heading Panel */}
+          <div className="w-full md:w-[45%] min-w-[220px] h-[500px] bg-[#f9a23d] flex flex-col justify-center items-center text-center text-black font-extrabold text-3xl md:text-4xl py-10 rounded-tl-[100px] rounded-bl-[100px]">
+            <span>HIGHEST</span>
+            <span>SOLD</span>
+          </div>
+
+          
         </div>
       </section>
 
 
-
-        {/* Health Benefits Section */}
-        <section className="relative py-4 bg-white overflow-hidden">
-  {/* Section Heading */}
-  <h2 className="text-4xl md:text-5xl font-bold text-center text-black mb-12 tracking-wide pt-8 relative z-10">
+<h2 className="text-4xl md:text-5xl font-bold text-center text-black mb-8 tracking-wide pt-8 relative z-10">
     HEALTH BENEFITS
   </h2>
+    <section className="relative overflow-hidden bg-white py-4">
+  {/* Section Heading */}
+  
 
-  {/* Curved Background */}
-  <div className="absolute inset-0">
-    <svg
-      className="absolute top-0 left-0 w-full h-full"
-      viewBox="0 0 1440 500"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="none"
-    >
-      <path
-        d="M0 120C360 80 710 20 1070 80C1100 85 1300 95 1440 100V380C1200 360 890 450 1000 420C470 500 640 480 0 400V120Z"
-        fill="#FDBA4F"
-      />
-    </svg>
+  {/* Curvy Background Image */}
+  <div className="absolute inset-0 z-0">
+    <img src={curveBg} alt="Curvy background" className="w-full h-full object-cover"
+     />
   </div>
 
-  {/* Content Layer */}
-  <div className="relative z-10 max-w-[1440px] mx-auto px-4 py-24">
-    
-    {/* Circles with Text - Responsive Grid */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center mb-16">
-      {/* Benefit 1 */}
-      <div className="flex flex-col items-center">
-        <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-300 rounded-full mb-4" />
-        <p className="text-sm md:text-base font-semibold text-black leading-tight max-w-[120px]">
+  {/* Circles with Icons & Text */}
+  <div className="relative z-10 max-w-[1200px] mx-auto px-4 py-12">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 place-items-center">
+      {/* 1. Hygienically Handmade */}
+      <div className="flex flex-col items-center text-center">
+        <img src={groupPickles} className="w-20 md:w-24 mb-2" alt="Hygienic" />
+        <p className="text-sm md:text-base font-semibold text-black">
           Hygienically<br />Handmade
         </p>
       </div>
 
-      {/* Benefit 2 */}
-      <div className="flex flex-col items-center">
-        <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-300 rounded-full mb-4" />
-        <p className="text-sm md:text-base font-semibold text-black leading-tight max-w-[140px]">
+      {/* 2. Premium Ingredients */}
+      <div className="flex flex-col items-center text-center">
+        <img src={groupPickles} className="w-20 md:w-24 mb-2" alt="Premium Ingredients" />
+        <p className="text-sm md:text-base font-semibold text-black">
           Premium<br />Ingredients<br />Balanced Spicing
         </p>
       </div>
 
-      {/* Benefit 3 */}
-      <div className="flex flex-col items-center">
-        <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-300 rounded-full mb-4" />
-        <p className="text-sm md:text-base font-semibold text-black leading-tight max-w-[140px]">
+      {/* 3. Sun-dried & Stored */}
+      <div className="flex flex-col items-center text-center">
+        <img src={groupPickles} className="w-20 md:w-24 mb-2" alt="Sun-dried" />
+        <p className="text-sm md:text-base font-semibold text-black">
           Sun-dried<br />& Stored in Barnis
         </p>
       </div>
 
-      {/* Benefit 4 */}
-      <div className="flex flex-col items-center">
-        <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-300 rounded-full mb-4" />
-        <p className="text-sm md:text-base font-semibold text-black leading-tight max-w-[140px]">
+      {/* 4. No Chemicals */}
+      <div className="flex flex-col items-center text-center">
+        <img src={groupPickles} className="w-20 md:w-24 mb-2" alt="No Preservatives" />
+        <p className="text-sm md:text-base font-semibold text-black">
           No<br />Chemicals/<br />Preservatives
         </p>
       </div>
     </div>
 
-    {/* Pickle Image */}
-    <div className="flex justify-center md:justify-start pl-0 md:pl-10">
+    {/* Pickle Group Image */}
+    <div className="flex justify-center pt-16">
       <img
-        src={groupPickles || "/placeholder.svg"}
-        alt="Health Benefits Pickles"
-        className="w-auto h-40 md:h-48 object-contain"
+        src={groupPickles}
+        alt="Pickles Group"
+        className="h-40 md:h-48 object-contain"
       />
     </div>
   </div>
 </section>
+
 
 
 {/*Testimonial  */}
@@ -302,9 +289,6 @@ export default function HomePage() {
               </div>
             </div>
           </section>
-
-
-      <Footer />
 
     </div>
   )

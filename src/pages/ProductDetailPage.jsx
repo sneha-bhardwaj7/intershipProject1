@@ -1,9 +1,9 @@
 import { useParams, Link } from "react-router-dom"
-import { Star, Heart, ShoppingCart, Plus, Minus, ArrowLeft } from 'lucide-react'
+import { Star, Heart, Plus, Minus, ArrowLeft } from 'lucide-react'
 import { useState, useEffect } from "react"
 import { products } from "../data/products"
-import ProductCard from "../components/common/ProductCard"
 import Footer from "../components/common/Footer"
+import ProductCard from "../components/common/ProductCard"
 
 export default function ProductDetailPage() {
   const { id } = useParams()
@@ -13,7 +13,6 @@ export default function ProductDetailPage() {
   const [recentlyBought, setRecentlyBought] = useState([])
 
   useEffect(() => {
-    // Find the product from all categories
     let foundProduct = null
     let allProducts = []
 
@@ -25,14 +24,12 @@ export default function ProductDetailPage() {
 
     if (foundProduct) {
       setProduct(foundProduct)
-      
-      // Get similar products from the same category
+
       const similar = allProducts
         .filter((p) => p.category === foundProduct.category && p.id !== foundProduct.id)
-        .slice(0, 3)
+        .slice(0, 4)
       setSimilarProducts(similar)
 
-      // Get recently bought together (random products for demo)
       const recent = allProducts
         .filter((p) => p.id !== foundProduct.id)
         .slice(0, 3)
@@ -41,18 +38,17 @@ export default function ProductDetailPage() {
   }, [id])
 
   const handleQuantityChange = (action) => {
-    if (action === "increase") {
-      setQuantity((prev) => prev + 1)
-    } else if (action === "decrease" && quantity > 1) {
-      setQuantity((prev) => prev - 1)
-    }
+    if (action === "increase") setQuantity((prev) => prev + 1)
+    else if (action === "decrease" && quantity > 1) setQuantity((prev) => prev - 1)
   }
 
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <Star key={index} className={`w-4 h-4 ${index < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`} />
+  const renderStars = (rating) =>
+    Array.from({ length: 5 }, (_, index) => (
+      <Star
+        key={index}
+        className={`w-4 h-4 ${index < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+      />
     ))
-  }
 
   if (!product) {
     return (
@@ -69,7 +65,7 @@ export default function ProductDetailPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header with Back Button */}
+      {/* Header */}
       <div className="bg-orange-500 text-white py-4">
         <div className="container mx-auto px-4 flex items-center gap-4">
           <Link to="/banana-chips" className="flex items-center gap-2 hover:text-orange-200">
@@ -82,10 +78,10 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
-      {/* Product Detail Section */}
+      {/* Product Details */}
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {/* Product Images */}
+          {/* Left - Images */}
           <div className="space-y-4">
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
               <img
@@ -94,21 +90,22 @@ export default function ProductDetailPage() {
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* Thumbnail images */}
             <div className="flex gap-2">
               <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden border-2 border-orange-500">
-                <img
-                  src={product.image || "/placeholder.svg"}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
+                <img src={product.image || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover" />
               </div>
-              <div className="w-16 h-16 bg-gray-200 rounded-lg"></div>
-              <div className="w-16 h-16 bg-gray-200 rounded-lg"></div>
+              <div className="w-16 h-16 bg-gray-200 rounded-lg">
+                  <img src={product.image || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover" />
+
+              </div>
+              <div className="w-16 h-16 bg-gray-200 rounded-lg">
+                  <img src={product.image || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover" />
+
+              </div>
             </div>
           </div>
 
-          {/* Product Info */}
+          {/* Right - Info */}
           <div className="space-y-6">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 mb-2">{product.name}</h1>
@@ -118,7 +115,6 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* Price */}
             <div className="space-y-2">
               <div className="flex items-center gap-4">
                 <span className="text-2xl font-bold text-gray-900">₹{product.price}</span>
@@ -129,25 +125,21 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            {/* Quantity Selector */}
             <div className="flex items-center gap-4">
               <span className="font-medium">Qty:</span>
               <div className="flex items-center border rounded-lg">
-                <button
-                  onClick={() => handleQuantityChange("decrease")}
-                  className="p-2 hover:bg-gray-100"
-                  disabled={quantity <= 1}
-                >
+                <button onClick={() => handleQuantityChange("decrease")} className="p-2 hover:bg-gray-100" disabled={quantity <= 1}>
                   <Minus className="w-4 h-4" />
                 </button>
                 <span className="px-4 py-2 font-medium">{quantity}</span>
                 <button onClick={() => handleQuantityChange("increase")} className="p-2 hover:bg-gray-100">
                   <Plus className="w-4 h-4" />
                 </button>
+
+                
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="space-y-3">
               <button className="w-full bg-orange-500 text-white py-3 px-6 rounded-lg font-medium hover:bg-orange-600 flex items-center justify-center gap-2">
                 Buy Online
@@ -156,27 +148,41 @@ export default function ProductDetailPage() {
                 <Heart className="w-5 h-5" />
                 Add to Wishlist
               </button>
+
+              <div className="flex gap-6 mt-12">
+              <div className="w-26 h-26 bg-gray-100 rounded-lg overflow-hidden border-2 border-orange-500">
+                <img src={product.image || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover" />
+              </div>
+              <div className="w-26 h-26 bg-gray-200 rounded-lg">
+                  <img src={product.image || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover" />
+
+              </div>
+              <div className="w-26 h-26 bg-gray-200 rounded-lg">
+                  <img src={product.image || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover" />
+
+              </div>
+            </div>
             </div>
           </div>
         </div>
 
-        {/* Description Section */}
+        {/* Description */}
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-4">DESCRIPTION</h2>
           <div className="bg-gray-50 p-6 rounded-lg">
             <p className="text-gray-700 leading-relaxed mb-4">
-              {product.description}. Our premium quality {product.name.toLowerCase()} are made from the finest ingredients, 
-              ensuring maximum flavor and nutritional value. Each batch is carefully prepared to maintain the authentic 
+              {product.description}. Our premium quality {product.name.toLowerCase()} are made from the finest ingredients,
+              ensuring maximum flavor and nutritional value. Each batch is carefully prepared to maintain the authentic
               taste and texture that our customers love.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Perfect as a healthy snack option, these can be enjoyed at any time of the day. Rich in natural flavors 
+              Perfect as a healthy snack option, these can be enjoyed at any time of the day. Rich in natural flavors
               and free from artificial preservatives, making them a wholesome choice for the entire family.
             </p>
           </div>
         </div>
 
-        {/* Key Ingredients */}
+        {/* Ingredients */}
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-4">KEY INGREDIENT</h2>
           <ul className="list-disc list-inside text-gray-700 space-y-2 bg-gray-50 p-6 rounded-lg">
@@ -187,75 +193,79 @@ export default function ProductDetailPage() {
           </ul>
         </div>
 
-        {/* Similar Products */}
-                {similarProducts.length > 0 && (
-            <div className="mb-12">
+
+        {/* Cards UI Section */}
+        {(similarProducts.length > 0 || recentlyBought.length > 0) && (
+          <div className="space-y-16">
+            {similarProducts.length > 0 && (
+              <div>
                 <h2 className="text-xl font-bold mb-6">Similar Products</h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {similarProducts.map((similarProduct) => (
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {similarProducts.map((item) => (
                     <div
-                    key={similarProduct.id}
-                    className="w-60 h-[400px] bg-white border-2 border-orange-500 rounded-2xl p-4 flex flex-col justify-between shadow-sm"
+                      key={item.id}
+                      className="bg-white border border-orange-500 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
                     >
-                    <img
-                        src={similarProduct.image || "/placeholder.svg"}
-                        alt={similarProduct.name}
-                        className="w-36 h-42 object-cover rounded-xl mb-3 mx-auto"
-                    />
-                    <h3 className="font-medium text-sm mb-2">{similarProduct.name}</h3>
-                    <p className="text-xs text-gray-600 mb-2">{similarProduct.description}</p>
-                    <div className="flex items-center justify-between mb-3">
-                        <span className="font-bold text-sm">₹{similarProduct.price}</span>
-                        <div className="flex items-center">{renderStars(similarProduct.rating)}</div>
+                      <img src={item.image || "/placeholder.svg"} alt={item.name} className="w-full h-56 object-cover p-5" />
+                      <div className="p-4 flex flex-col justify-between h-[200px]">
+                        <div className="space-y-2">
+                          <h3 className="text-sm font-semibold text-gray-800">{item.name}</h3>
+                          <p className="text-xs text-gray-500 line-clamp-2">{item.description}</p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-bold text-orange-600">₹{item.price}</span>
+                            <div className="flex">{renderStars(item.rating)}</div>
+                          </div>
+                        </div>
+                        <button className="mt-4 w-full bg-orange-500 text-white text-sm py-2 rounded-lg hover:bg-orange-600 transition">
+                          Add to Cart
+                        </button>
+                      </div>
                     </div>
-                    <button className="w-full bg-orange-500 text-white py-2 px-3 rounded text-sm hover:bg-orange-600">
-                        Add to cart
-                    </button>
-                    </div>
-                ))}
+                  ))}
                 </div>
-            </div>
+              </div>
             )}
 
-           {/* Recently Bought Together */}
-                {recentlyBought.length > 0 && (
-                <div className="mb-12">
-                    <h2 className="text-xl font-bold mb-6">Recently Bought Together</h2>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {recentlyBought.map((recentProduct) => (
-                        <div
-                        key={recentProduct.id}
-                        className="w-60 h-[400px] bg-white border-2 border-orange-500 rounded-2xl p-4 flex flex-col justify-between shadow-sm"
-                        >
-                        <img
-                            src={recentProduct.image || "/placeholder.svg"}
-                            alt={recentProduct.name}
-                            className="w-36 h-42 object-cover rounded-xl mb-3 mx-auto"
-                        />
-                        <h3 className="font-medium text-sm mb-2">{recentProduct.name}</h3>
-                        <p className="text-xs text-gray-600 mb-2">{recentProduct.description}</p>
-                        <div className="flex items-center justify-between mb-3">
-                            <span className="font-bold text-sm">₹{recentProduct.price}</span>
-                            <div className="flex items-center">{renderStars(recentProduct.rating)}</div>
+            {recentlyBought.length > 0 && (
+              <div>
+                <h2 className="text-xl font-bold mb-6">Recently Bought Together</h2>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {recentlyBought.map((item) => (
+                    <div
+                      key={item.id}
+                      className="bg-white border border-orange-500 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+                    >
+                      <img src={item.image || "/placeholder.svg"} alt={item.name} className="w-full h-48 object-cover" />
+                      <div className="p-4 flex flex-col justify-between h-[200px]">
+                        <div className="space-y-2">
+                          <h3 className="text-sm font-semibold text-gray-800">{item.name}</h3>
+                          <p className="text-xs text-gray-500 line-clamp-2">{item.description}</p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-bold text-orange-600">₹{item.price}</span>
+                            <div className="flex">{renderStars(item.rating)}</div>
+                          </div>
                         </div>
-                        <button className="w-full bg-orange-500 text-white py-2 px-3 rounded text-sm hover:bg-orange-600">
-                            Add to cart
+                        <button className="mt-4 w-full bg-orange-500 text-white text-sm py-2 rounded-lg hover:bg-orange-600 transition">
+                          Add to Cart
                         </button>
-                        </div>
-                    ))}
+                      </div>
                     </div>
+                  ))}
                 </div>
-                )}
+              </div>
+            )}
+          </div>
+        )}
+       
 
-
-        {/* Ratings and Reviews */}
+        {/* Ratings */}
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-6">Rating and Reviews</h2>
           <div className="bg-gray-50 p-6 rounded-lg">
             <div className="flex items-center gap-8 mb-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-gray-900">{product.rating}.0</div>
-                <div className="flex items-center justify-center mt-1">{renderStars(product.rating)}</div>
+                <div className="flex justify-center mt-1">{renderStars(product.rating)}</div>
                 <div className="text-sm text-gray-600 mt-1">150 reviews</div>
               </div>
               <div className="flex-1">
@@ -278,41 +288,28 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* Sample Reviews */}
+            {/* Reviews */}
             <div className="space-y-4">
-              <div className="border-t pt-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="flex">{renderStars(5)}</div>
-                  <span className="font-medium text-sm">John Doe</span>
+              {[
+                { name: "John Doe", rating: 5, text: "Excellent quality! The taste is amazing and the packaging is perfect." },
+                { name: "Sarah Smith", rating: 4, text: "Good product overall. Fresh and tasty. Delivery was quick too." },
+                { name: "Mike Johnson", rating: 5, text: "Love the crunchiness and flavor. Perfect snack for any time!" },
+              ].map((review, index) => (
+                <div key={index} className="border-t pt-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex">{renderStars(review.rating)}</div>
+                    <span className="font-medium text-sm">{review.name}</span>
+                  </div>
+                  <p className="text-gray-700 text-sm">{review.text}</p>
                 </div>
-                <p className="text-gray-700 text-sm">
-                  Excellent quality! The taste is amazing and the packaging is perfect. Will definitely order again.
-                </p>
-              </div>
-              <div className="border-t pt-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="flex">{renderStars(4)}</div>
-                  <span className="font-medium text-sm">Sarah Smith</span>
-                </div>
-                <p className="text-gray-700 text-sm">Good product overall. Fresh and tasty. Delivery was quick too.</p>
-              </div>
-              <div className="border-t pt-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="flex">{renderStars(5)}</div>
-                  <span className="font-medium text-sm">Mike Johnson</span>
-                </div>
-                <p className="text-gray-700 text-sm">Love the crunchiness and flavor. Perfect snack for any time!</p>
-              </div>
+              ))}
             </div>
 
-            <button className="mt-6 text-orange-500 font-medium hover:text-orange-600 text-sm">
-              View all reviews
-            </button>
+            <button className="mt-6 text-orange-500 font-medium hover:text-orange-600 text-sm">View all reviews</button>
           </div>
         </div>
       </div>
 
-      <Footer />
     </div>
   )
 }

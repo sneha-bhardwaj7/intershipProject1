@@ -53,9 +53,6 @@ export default function PicklesPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer/>
     </div>
   )
 }

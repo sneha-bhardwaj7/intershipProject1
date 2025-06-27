@@ -60,8 +60,6 @@ export default function BananaChipsPage() {
 </section>
 
 
-      {/* Footer */}
-      <Footer/>
     </div>
   )
 }
